@@ -12,6 +12,8 @@ import { Card, Grid, ListItemButton, ListItemText, Checkbox} from "@mui/material
 const Todos = ({ todos, deleteTodo }) => {
   const todoList = todos.length ? (
     todos.map((todo) => {
+       var color = "white"
+       if(new Date(todo.due) === new Date(todo.date)){color = "red"}
       return (
         <Grid key={todo.id}>
           <Card style={{marginTop:10}}>
@@ -21,10 +23,12 @@ const Todos = ({ todos, deleteTodo }) => {
             <ListItemButton component="a" href="#simple-list">
               <Checkbox style={{paddingLeft:0}} color="primary" onClick={() => deleteTodo(todo.id)}/>
               <ListItemText primary={todo.content} secondary={todo.date}/>
+              <div>{todo.due}</div> 
             </ListItemButton>
           </Card>
         </Grid>
       );
+
     })
   ) : (
     <p>You have no todo's left </p>
